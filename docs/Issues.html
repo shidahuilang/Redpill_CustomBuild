@@ -31,7 +31,7 @@
   <!-- <script src="https://fastly.jsdelivr.net/npm/marked/marked.min.js"></script> -->
   <script type="application/javascript">
 
-    var repo = "wjz304/Redpill_CustomBuild";
+    var repo = "wjz304/rpcb";
     var rlRepo = "wjz304/redpill-load"
     var rpRepo = "wjz304/rp-ext"
 
@@ -260,6 +260,8 @@
       var xreleases = Object.keys(_configs).sort();
       $("#model")[0].options.length = 0;
       for (var i in xreleases) {
+          if (xreleases[i].at(0) == '#' ) 
+            continue
           $("#model")[0].options.add(new Option(xreleases[i], xreleases[i]));
       }
       changeModel();
@@ -279,8 +281,10 @@
     }
 
     function changeproductsimage() {
-      var model = $("#model").val().replace("+","plus");
-      $('#products').html(`<img src="https://www.synology.cn/img/products/detail/${model}/heading.png" width="20%">`);
+      //var model = $("#model").val().replace("#","").replace("+","plus");
+      //$('#products').html(`<img src="https://www.synology.cn/img/products/detail/${model}/heading.png" width="20%">`);
+      var model = $("#model").val().replace("#","").replace("+","%2B");
+      $('#products').html(`<img src="https://www.synology.com/api/products/getPhoto?product=${model}&type=img_s&sort=0" width="20%">`);
     }
 
     function changeVersion() {
